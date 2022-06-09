@@ -1,7 +1,7 @@
 - mongoDB 는 NoSQL 이다. (Not Only SQL) ⇒ 관계형 DB 가 아니라서 고정된 스키마나 join 이 존재하지 않는다.
 - RDBMS 와 키워드 비교.
     
-    ![Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/eb0e6826-ba2e-4edf-9646-053caf88e260/Untitled.png)
+    ![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/eb0e6826-ba2e-4edf-9646-053caf88e260/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220609%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220609T130921Z&X-Amz-Expires=86400&X-Amz-Signature=9f3c449f4833f130ea8a9503fb6c399f4619fb862d009a13d824fcae0466d152&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject)
     
 
 ### MongoDB 설치 후, 환경변수 path 에 bin 경로 지정하면 편하긴 함. ⇒ cmd 에서 mongo 치면 바로 cli 작업가능.
