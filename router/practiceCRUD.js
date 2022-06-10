@@ -1,4 +1,6 @@
-let Client = require('mongodb').MongoClient;
+const express = require('express');
+const router = new express.Router();
+const Client = require('mongodb').MongoClient;
 
 Client.connect('mongodb://localhost:27017', async function (error, client) {
   let db = client.db('test');
@@ -28,3 +30,5 @@ Client.connect('mongodb://localhost:27017', async function (error, client) {
     await client.close();
   }
 });
+
+module.exports = router
