@@ -1,30 +1,113 @@
 <script>
-	export let name;
+  let notes = [];
+  let data = {
+    title: '',
+    category: '',
+    content: '',
+    id: null,
+  };
+  let addNote = () => {
+    const newNote = {
+      id: notes.length + 1,
+      title: data.title,
+      category: data.category,
+      content: data.content,
+    };
+    notes = notes.concat(newNote);
+    data = {
+      id: null,
+      title: '',
+      category: '',
+      content: '',
+    };
+    console.log(notes);
+  };
+
+  let isEdit = false;
+  let editNote = (note) => {
+    isEdit = true;
+    data = note;
+  };
+
+  let updateNote = () => {
+    isEdit = !isEdit;
+    let noteDB = {
+      title: data.title,
+      category: data.category,
+      content: data.content,
+      id: data.id,
+    };
+    let objIndex = notes.findIndex((obj) => obj.id == noteDB.id);
+    console.log('Before update: ', notes[objIndex]);
+    notes[objIndex] = noteDB;
+    data = {
+      id: null,
+      title: '',
+      category: '',
+      content: '',
+    };
+  };
+
+  let deleteNote = (id) => {
+    console.log(id);
+    notes = notes.filter((note) => note.id !== id);
+  };
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
+<section>
+  <div class="container">
+    <div class="row mt-5 ">
+      <div class="col-md-6">
+        <div class="card p-2 shadow">
+          <div class="card-body">
+            <h5 class="card-title mb-4">Add New Note</h5>
+            <form>
+              <div class="form-group">
+                <label for="title">Title</label>
+                <input bind:value={data.title} type="text" class="form-control" id="text" placeholder="Note Title" />
+              </div>
+              <div class="form-group">
+                <label for="category">Category</label>
+                <select class="form-control" id="category" bind:value={data.category}>
+                  <option selected disaabled>Selecet a category</option>
+                  <option value="category1">category1</option>
+                  <option value="category2">category2</option>
+                  <option value="category3">category3</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="content">Content</label>
+                <textarea bind:value={data.content} class="form-control" id="content" rows="3" placeholder="Note Content" />
+              </div>
+              {#if isEdit === false}
+                <button type="submit" on:click|preventDefault={addNote} class="btn btn-primary"> Add Note </button>
+              {:else}
+                <button type="submit" on:click|preventDefault={updateNote} class="btn btn-info"> Edit Note </button>
+              {/if}
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        {#each notes as note}
+          <div class="card mb-3">
+            <div class="card-header">{note.category}</div>
+            <div class="card-body">
+              <h5 class="card-title">{note.title}</h5>
+              <p class="card-text">{note.content}</p>
+              <button class="btn btn-info" on:click={editNote(note)}> Edit </button>
+              <button class="btn btn-danger" on:click={deleteNote(note.id)}> Delete </button>
+            </div>
+          </div>
+        {/each}
+      </div>
+    </div>
+  </div>
+</section>
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+  @import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+  * {
+    font-family: 'Nunito', sans-serif;
+  }
 </style>
