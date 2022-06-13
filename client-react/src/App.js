@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import { useThemeSwitcher } from "react-css-theme-switcher";
 import { Switch, Input, Card, Row, Col, Button, Form } from "antd";
+import axios from 'axios';
 
 export default function App() {
   const [form] = Form.useForm();
@@ -30,8 +31,12 @@ export default function App() {
     return null;
   }
 
-  const setTitleContent = () => {
-    console.log(title, content);
+  const setTitleContent = async () => {
+    // console.log(title, content);
+    const url = `http://localhost:7000/addContent`;
+    await axios.patch(url, { title, content }).then((res) => {
+      console.log(res.data)
+    })
   }
 
   return (
